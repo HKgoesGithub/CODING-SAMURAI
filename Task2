@@ -1,0 +1,84 @@
+import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("\nCalculator Application");
+            System.out.println("---------------------");
+            System.out.println("1. Addition");
+            System.out.println("2. Subtraction");
+            System.out.println("3. Multiplication");
+            System.out.println("4. Division");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    addition(scanner);
+                    break;
+                case 2:
+                    subtraction(scanner);
+                    break;
+                case 3:
+                    multiplication(scanner);
+                    break;
+                case 4:
+                    division(scanner);
+                    break;
+                case 5:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+        scanner.close();
+    }
+
+    private static void addition(Scanner scanner) {
+        double num1 = getNumber(scanner, "Enter the first number: ");
+        double num2 = getNumber(scanner, "Enter the second number: ");
+        double result = num1 + num2;
+        System.out.printf("%.2f + %.2f = %.2f%n", num1, num2, result);
+    }
+
+    private static void subtraction(Scanner scanner) {
+        double num1 = getNumber(scanner, "Enter the first number: ");
+        double num2 = getNumber(scanner, "Enter the second number: ");
+        double result = num1 - num2;
+        System.out.printf("%.2f - %.2f = %.2f%n", num1, num2, result);
+    }
+
+    private static void multiplication(Scanner scanner) {
+        double num1 = getNumber(scanner, "Enter the first number: ");
+        double num2 = getNumber(scanner, "Enter the second number: ");
+        double result = num1 * num2;
+        System.out.printf("%.2f * %.2f = %.2f%n", num1, num2, result);
+    }
+
+    private static void division(Scanner scanner) {
+        double num1 = getNumber(scanner, "Enter the first number: ");
+        double num2 = getNumber(scanner, "Enter the second number: ");
+
+        if (num2 == 0) {
+            System.out.println("Error: Division by zero is not allowed.");
+            return;
+        }
+
+        double result = num1 / num2;
+        System.out.printf("%.2f / %.2f = %.2f%n", num1, num2, result);
+    }
+
+    private static double getNumber(Scanner scanner, String message) {
+        System.out.print(message);
+        double number = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+        return number;
+    }
+}
