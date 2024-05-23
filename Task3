@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class Student {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double[] grades = new double[5];
+        double totalWeight = 0;
+        double totalScore = 0;
+
+        System.out.println("Student Grade Calculator");
+        System.out.println("---------------------");
+
+        System.out.println("Enter your grades for the following components:");
+        System.out.println("1. Assignments (20%):");
+        grades[0] = scanner.nextDouble();
+        totalWeight += 0.2 * grades.length;
+        totalScore += 0.2 * grades[0];
+
+        System.out.println("2. Quizzes (10%):");
+        grades[1] = scanner.nextDouble();
+        totalWeight += 0.1 * grades.length;
+        totalScore += 0.1 * grades[1];
+
+        System.out.println("3. Midterm Exam (30%):");
+        grades[2] = scanner.nextDouble();
+        totalWeight += 0.3 * grades.length;
+        totalScore += 0.3 * grades[2];
+
+        System.out.println("4. Final Exam (40%):");
+        grades[3] = scanner.nextDouble();
+        totalWeight += 0.4 * grades.length;
+        totalScore += 0.4 * grades[3];
+
+        System.out.println("5. Extra Credit (bonus, up to 5%):");
+        grades[4] = scanner.nextDouble();
+        totalWeight += 0.05 * grades.length;
+        totalScore += Math.min(0.05, grades[4]);
+
+        double finalGrade = totalScore / totalWeight;
+        String letterGrade = "";
+
+        if (finalGrade >= 0.9) {
+            letterGrade = "A";
+        } else if (finalGrade >= 0.8) {
+            letterGrade = "B";
+        } else if (finalGrade >= 0.7) {
+            letterGrade = "C";
+        } else if (finalGrade >= 0.6) {
+            letterGrade = "D";
+        } else {
+            letterGrade = "F";
+        }
+
+        System.out.printf("Your final course grade is: %.2f%% (%s)%n", finalGrade * 100, letterGrade);
+
+        scanner.close();
+    }
+}
