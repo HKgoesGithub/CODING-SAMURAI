@@ -1,0 +1,111 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Task {
+    String title;
+    String description;
+    String dueDate;
+    boolean completed;
+
+    public Task(String title, String description, String dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.completed = false;
+    }
+}
+
+public class ToDoListApp {
+    static ArrayList<Task> tasks = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        displayMenu();
+    }
+
+    static void displayMenu() {
+        System.out.println("1. Add Task");
+        System.out.println("2. Mark Task as Complete");
+        System.out.println("3. View Tasks");
+        System.out.println("4. Remove Task");
+        System.out.println("5. Exit");
+        System.out.print("Enter your choice: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        switch (choice) {
+            case 1:
+                addTask();
+                break;
+            case 2:
+                markTaskAsComplete();
+                break;
+            case 3:
+                viewTasks();
+                break;
+            case 4:
+                removeTask();
+                break;
+            case 5:
+                System.out.println("Exiting...");
+                System.exit(0);
+            default:
+                System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+        }
+        displayMenu(); // Display menu again after completing an operation
+    }
+
+    static void addTask() {
+        System.out.print("Enter task title: ");
+        String title = scanner.nextLine();
+        System.out.print("Enter task description: ");
+        String description = scanner.nextLine();
+        System.out.print("Enter due date: ");
+        String dueDate = scanner.nextLine();
+
+        Task task = new Task(title, description, dueDate);
+        tasks.add(task);
+        System.out.println("Task added successfully.");
+    }
+
+    static void markTaskAsComplete() {
+        System.out.print("Enter the index of the task to mark as complete: ");
+        int index = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        if (index >= 0 && index < tasks.size()) {
+            Task task = tasks.get(index);
+            task.completed = true;
+            System.out.println("Task marked as complete.");
+        } else {
+            System.out.println("Invalid task index.");
+        }
+    }
+
+    static void viewTasks() {
+        System.out.println("Tasks:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            System.out.println("Task " + i + ":");
+            System.out.println("Title: " + task.title);
+            System.out.println("Description: " + task.description);
+            System.out.println("Due Date: " + task.dueDate);
+            System.out.println("Status: " + (task.completed ? "Completed" : "Pending"));
+            System.out.println();
+        }
+    }
+
+    static void removeTask() {
+        System.out.print("Enter the index of the task to remove: ");
+        int index = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        if (index >= 0 && index < tasks.size()) {
+            tasks.remove(index);
+            System.out.println("Task removed successfully.");
+        } else {
+            System.out.println("Invalid task index.");
+        }
+    }
+}
